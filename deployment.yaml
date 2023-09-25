@@ -1,0 +1,28 @@
+
+# Before deploying, build the Docker image using the following command:
+# docker build -t image-analysis-api:latest .
+#
+# Push the Docker image to a container registry (e.g., Docker Hub) using the following command:
+# docker push image-analysis-api:latest
+#
+# Update the image field below with the repository and tag of the pushed Docker image.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-analysis-api-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: image-analysis-api
+  template:
+    metadata:
+      labels:
+        app: image-analysis-api
+    spec:
+      containers:
+      - name: image-analysis-api-container
+        image: image-analysis-api:latest
+        ports:
+        - containerPort: 5000
